@@ -27,6 +27,7 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
     "@micra/commit-lint-config": "github:micrajs/commit-lint-config#next",
+    "@micra/core": "github:micrajs/core#next",
     "@micra/eslint-config": "github:micrajs/eslint-config#next",
     "@micra/typescript-config": "github:micrajs/typescript-config#next",
     "@micra/vite-config": "github:micrajs/vite-config#next",
@@ -43,5 +44,9 @@
     "typescript": "^4.6.2",
     "vite": "^2.8.6",
     "vitest": "^0.6.1"
+  },
+  "dependencies": {
+    "@micra/error": "github:micrajs/error#next",
+    "@micra/event-emitter": "github:micrajs/event-emitter#next"
   }
 }

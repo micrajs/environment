@@ -3,7 +3,10 @@ lockfileVersion: 5.3
 specifiers:
   '@commitlint/cli': ^16.2.1
   '@micra/commit-lint-config': github:micrajs/commit-lint-config#next
+  '@micra/core': github:micrajs/core#next
+  '@micra/error': github:micrajs/error#next
   '@micra/eslint-config': github:micrajs/eslint-config#next
+  '@micra/event-emitter': github:micrajs/event-emitter#next
   '@micra/typescript-config': github:micrajs/typescript-config#next
   '@micra/vite-config': github:micrajs/vite-config#next
   '@types/node': ^17.0.21
@@ -20,9 +23,14 @@ specifiers:
   vite: ^2.8.6
   vitest: ^0.6.1
 
+dependencies:
+  '@micra/error': github.com/micrajs/error/5da332cef691df9d9c1ab6b87746be6392aeb2da
+  '@micra/event-emitter': github.com/micrajs/event-emitter/fa18ecee26cd15eb796c9078b073ab91a33ad6cd
+
 devDependencies:
   '@commitlint/cli': 16.2.1
   '@micra/commit-lint-config': github.com/micrajs/commit-lint-config/eb3a2fbea1ef956dafcb1746c3d582d9c0081c38_@commitlint+cli@16.2.1
+  '@micra/core': github.com/micrajs/core/9ca262cce225690d12bfb208824d820452de3a40
   '@micra/eslint-config': github.com/micrajs/eslint-config/a2e24e17a658d524926ee9308018aceeab1311b5_83bc012e22a441999bc7e52466863909
   '@micra/typescript-config': github.com/micrajs/typescript-config/4d2468272da64a45399908882dc5e90c8ba60287
   '@micra/vite-config': github.com/micrajs/vite-config/46dc69c8e5e01d1813bfee063c03979ad15a43c3_418ccc019ab116d597fd339a95d956bc
@@ -3314,6 +3322,18 @@ packages:
       conventional-changelog-conventionalcommits: 4.6.3
     dev: true
 
+  github.com/micrajs/core/9ca262cce225690d12bfb208824d820452de3a40:
+    resolution: {tarball: https://codeload.github.com/micrajs/core/tar.gz/9ca262cce225690d12bfb208824d820452de3a40}
+    name: '@micra/core'
+    version: 0.1.0-next.0
+    dev: true
+
+  github.com/micrajs/error/5da332cef691df9d9c1ab6b87746be6392aeb2da:
+    resolution: {tarball: https://codeload.github.com/micrajs/error/tar.gz/5da332cef691df9d9c1ab6b87746be6392aeb2da}
+    name: '@micra/error'
+    version: 0.1.0-next.0
+    dev: false
+
   github.com/micrajs/eslint-config/a2e24e17a658d524926ee9308018aceeab1311b5_83bc012e22a441999bc7e52466863909:
     resolution: {tarball: https://codeload.github.com/micrajs/eslint-config/tar.gz/a2e24e17a658d524926ee9308018aceeab1311b5}
     id: github.com/micrajs/eslint-config/a2e24e17a658d524926ee9308018aceeab1311b5
@@ -3333,6 +3353,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  github.com/micrajs/event-emitter/fa18ecee26cd15eb796c9078b073ab91a33ad6cd:
+    resolution: {tarball: https://codeload.github.com/micrajs/event-emitter/tar.gz/fa18ecee26cd15eb796c9078b073ab91a33ad6cd}
+    name: '@micra/event-emitter'
+    version: 0.1.0-next.0
+    dev: false
 
   github.com/micrajs/typescript-config/4d2468272da64a45399908882dc5e90c8ba60287:
     resolution: {tarball: https://codeload.github.com/micrajs/typescript-config/tar.gz/4d2468272da64a45399908882dc5e90c8ba60287}
