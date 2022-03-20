@@ -1,3 +1,4 @@
+import {MockEnvironment} from '@/testing/mocks';
 import {Environment} from '../Environment';
 
 declare global {
@@ -36,12 +37,12 @@ describe('Environment tests', () => {
 
   it('should return the union of all the sources values', () => {
     const env1 = new MockEnvironment();
+    env1.all.mockReturnValue({value1: 42});
     const env2 = new MockEnvironment();
+    env2.all.mockReturnValue({value2: 24});
     const environment = new Environment();
-    env1.all = jest.fn().mockReturnValue({value1: 42});
-    env2.all = jest.fn().mockReturnValue({value2: 24});
-
     environment.addSources(env1, env2);
+
     const variables = environment.all();
 
     expect(variables).toEqual({
@@ -52,8 +53,8 @@ describe('Environment tests', () => {
 
   it('should get a variable from a source', () => {
     const env = new MockEnvironment();
-    env.has = jest.fn().mockImplementation((key) => key === 'value');
-    env.get = jest.fn().mockImplementation(() => 42);
+    env.has.mockImplementation((key) => key === 'value');
+    env.get.mockImplementation(() => 42);
     const environment = new Environment();
     environment.addSources(env);
 
@@ -89,10 +90,10 @@ describe('Environment tests', () => {
     const environment = new Environment();
     environment.addSources(env1, env2);
 
-    environment.init();
+    environment.initSync();
 
-    expect(env1.init).toHaveBeenCalled();
-    expect(env2.init).toHaveBeenCalled();
+    expect(env1.initSync).toHaveBeenCalled();
+    expect(env2.initSync).toHaveBeenCalled();
   });
 
   it('should initialize all sources asynchronously', async () => {
@@ -101,31 +102,21 @@ describe('Environment tests', () => {
     const environment = new Environment();
     environment.addSources(env1, env2);
 
-    await environment.initAsync();
+    await environment.init();
 
-    expect(env1.initAsync).toHaveBeenCalled();
-    expect(env2.initAsync).toHaveBeenCalled();
+    expect(env1.init).toHaveBeenCalled();
+    expect(env2.init).toHaveBeenCalled();
   });
 
   it('should validate all sources', () => {
+    const validator = vi.fn();
     const env1 = new MockEnvironment();
-    const env2 = new MockEnvironment();
+    env1.all.mockReturnValue({value: 42});
     const environment = new Environment();
-    environment.addSources(env1, env2);
+    environment.addSources(env1);
 
-    environment.validate();
+    environment.validate(validator);
 
-    expect(env1.validate).toHaveBeenCalled();
-    expect(env2.validate).toHaveBeenCalled();
-  });
-
-  it('should set a validator', () => {
-    const validator = jest.fn();
-    const environment = new Environment();
-    environment.setValidator(validator);
-
-    environment.validate();
-
-    expect(validator).toHaveBeenCalled();
+    expect(validator).toHaveBeenCalledWith({value: 42});
   });
 });
