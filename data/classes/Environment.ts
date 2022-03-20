@@ -1,15 +1,10 @@
-/// <reference types="@micra/core/environment" />
-import { EventEmitter } from '@micra/event-emitter';
+import {EventEmitter} from '@micra/event-emitter';
 
 export class Environment
   extends EventEmitter<Micra.EnvironmentEvents>
   implements Micra.Environment
 {
   envs: Micra.Environment[] = [];
-  /* eslint-disable-next-line @typescript-eslint/no-empty-function */
-  protected validator: (env: Record<string, unknown>) => void = () => {
-    this.envs.forEach((env) => env.validate());
-  };
 
   addSources(...envs: Micra.Environment[]): void {
     this.envs = this.envs.concat(envs);
@@ -42,21 +37,15 @@ export class Environment
     return this.envs.some((env) => env.has(key));
   }
 
-  init(): void {
-    this.envs.forEach((env) => env.init());
+  initSync(): void {
+    this.envs.forEach((env) => env.initSync());
   }
 
-  async initAsync(): Promise<void> {
-    await Promise.all(this.envs.map((env) => env.initAsync()));
+  async init(): Promise<void> {
+    await Promise.all(this.envs.map((env) => env.init()));
   }
 
-  setValidator(
-    validator: (definitions: Record<string, unknown>) => void,
-  ): void {
-    this.validator = validator;
-  }
-
-  validate(): void {
-    this.validator({});
+  validate(validator: Micra.EnvironmentValidator): void {
+    validator(this.all());
   }
 }
