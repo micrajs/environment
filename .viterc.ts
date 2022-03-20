@@ -7,7 +7,7 @@ export default defineConfig({
       external: ['@micra/error', '@micra/event-emitter', 'vitest'],
       input: {
         index: cwd('index.ts'),
-        testing: cwd('testing/index.ts'),
+        'testing': cwd('testing.ts'),
       },
     },
   },
