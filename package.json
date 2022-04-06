@@ -22,7 +22,8 @@
     "lint": "eslint --ext .ts,.tsx .",
     "test": "vitest run --config .viterc.ts",
     "test:coverage": "vitest run --coverage --config .viterc.ts",
-    "test:dev": "vitest --config .viterc.ts"
+    "test:dev": "vitest --config .viterc.ts",
+    "version:prerelease": "npm version prerelease --preid=next --allow-same-version && git push --follow-tags"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
