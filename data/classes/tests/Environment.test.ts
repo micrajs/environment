@@ -1,4 +1,4 @@
-import {MockEnvironment} from '@/testing/mocks';
+import {MockEnvironment} from '@/testing/environment';
 import {Environment} from '../Environment';
 
 declare global {
