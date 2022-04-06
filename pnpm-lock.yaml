@@ -7,6 +7,7 @@ specifiers:
   '@micra/error': next
   '@micra/eslint-config': next
   '@micra/event-emitter': next
+  '@micra/faker': ^0.1.0-next.2
   '@micra/typescript-config': next
   '@micra/vite-config': ^0.1.0-next.2
   '@types/node': ^17.0.21
@@ -32,6 +33,7 @@ devDependencies:
   '@micra/commit-lint-config': 0.1.0-next.1_@commitlint+cli@16.2.1
   '@micra/core': 0.1.0-next.2
   '@micra/eslint-config': 0.1.0-next.1_83bc012e22a441999bc7e52466863909
+  '@micra/faker': 0.1.0-next.2
   '@micra/typescript-config': 0.1.0-next.1
   '@micra/vite-config': 0.1.0-next.2_418ccc019ab116d597fd339a95d956bc
   '@types/node': 17.0.21
@@ -320,6 +322,10 @@ packages:
   /@micra/event-emitter/0.1.0-next.1:
     resolution: {integrity: sha512-a26tepwIWPKNQlqnFSbqo1Je+PGdTwZrucMWmAeiq6RE2hTQ8h1gVeDb55+1uxlazhnXxMW2SGrW6+EwcEzYiQ==}
     dev: false
+
+  /@micra/faker/0.1.0-next.2:
+    resolution: {integrity: sha512-6kTx5ege4PsSjrO2LcUrY4H7ZurbbZWsxb3Qxgafd+JSh9Y/2Icrv7hMN3kxgq7wdyoyCxG1nrvl4YwefzmQYQ==}
+    dev: true
 
   /@micra/typescript-config/0.1.0-next.1:
     resolution: {integrity: sha512-lM/ODpxkl8aQkGZI846QyG4Hsp0a4meuWH8Vj24ixJ2Q8T5DfIJ3BTHv4N50/qYXdrtbQvCgyda9/LYimXcynQ==}
