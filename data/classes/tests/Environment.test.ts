@@ -1,4 +1,4 @@
-import {MockEnvironment} from '@/testing/environment';
+import {MockEnvironment} from '@micra/core-test-utils/environment';
 import {Environment} from '../Environment';
 
 declare global {
