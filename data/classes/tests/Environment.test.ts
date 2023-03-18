@@ -119,4 +119,67 @@ describe('Environment tests', () => {
 
     expect(validator).toHaveBeenCalledWith({value: 42});
   });
+
+  it('should clone a given environment', async () => {
+    const env1 = new MockEnvironment();
+    const env2 = new MockEnvironment();
+    const environment = new Environment();
+    environment.addSources(env1);
+    await environment.init();
+
+    const cloned = environment.createScope();
+    cloned.addSources(env2);
+    await cloned.init();
+
+    expect(env2.init).toHaveBeenCalled();
+  });
+
+  it('scoped environments should inherit the parent values', () => {
+    const env1 = new MockEnvironment();
+    env1.all.mockReturnValue({value1: 42});
+    const env2 = new MockEnvironment();
+    env2.all.mockReturnValue({value2: 24});
+    const environment = new Environment();
+    environment.addSources(env1);
+
+    const scoped = environment.createScope();
+    scoped.addSources(env2);
+
+    expect(scoped.all()).toEqual({
+      value1: 42,
+      value2: 24,
+    });
+  });
+
+  it('scoped environments should override the parent values', () => {
+    const env1 = new MockEnvironment();
+    env1.all.mockReturnValue({value: 42});
+    const env2 = new MockEnvironment();
+    env2.all.mockReturnValue({value: 24});
+    const environment = new Environment();
+    environment.addSources(env1);
+
+    const scoped = environment.createScope();
+    scoped.addSources(env2);
+
+    expect(scoped.all()).toEqual({
+      value: 24,
+    });
+  });
+
+  it('does not expose scoped values to the parent', () => {
+    const env1 = new MockEnvironment();
+    env1.all.mockReturnValue({value: 42});
+    const env2 = new MockEnvironment();
+    env2.all.mockReturnValue({value: 24});
+    const environment = new Environment();
+    environment.addSources(env1);
+
+    const scoped = environment.createScope();
+    scoped.addSources(env2);
+
+    expect(environment.all()).toEqual({
+      value: 42,
+    });
+  });
 });

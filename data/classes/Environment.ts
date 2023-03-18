@@ -5,9 +5,11 @@ export class Environment
   implements Micra.Environment
 {
   envs: Micra.Environment[] = [];
+  private _uninitialized: Micra.Environment[] = [];
 
   addSources(...envs: Micra.Environment[]): void {
     this.envs = this.envs.concat(envs);
+    this._uninitialized = this._uninitialized.concat(envs);
     envs.forEach((env) => env.on('set', (event) => this.emit('set', event)));
   }
 
@@ -16,8 +18,8 @@ export class Environment
   >(): D {
     return this.envs.reduce(
       (variables: Partial<D>, env) => ({
-        ...env.all(),
         ...variables,
+        ...env.all(),
       }),
       {},
     ) as D;
@@ -38,14 +40,28 @@ export class Environment
   }
 
   initSync(): void {
-    this.envs.forEach((env) => env.initSync());
+    while (this._uninitialized.length) {
+      this._uninitialized.pop()?.initSync();
+    }
   }
 
   async init(): Promise<void> {
-    await Promise.all(this.envs.map((env) => env.init()));
+    const promises: Promise<unknown>[] = [];
+    while (this._uninitialized.length) {
+      promises.push(this._uninitialized.pop()?.init());
+    }
+
+    await Promise.all(promises);
   }
 
   validate(validator: Micra.EnvironmentValidator): void {
     validator(this.all());
+  }
+
+  createScope(): Environment {
+    const env = new Environment();
+    env.envs = this.envs.slice();
+    env.on('set', (event) => this.emit('set', event));
+    return env;
   }
 }
