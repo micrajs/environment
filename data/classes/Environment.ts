@@ -48,7 +48,10 @@ export class Environment
   async init(): Promise<void> {
     const promises: Promise<unknown>[] = [];
     while (this._uninitialized.length) {
-      promises.push(this._uninitialized.pop()?.init());
+      const promise = this._uninitialized.pop()?.init();
+      if (promise) {
+        promises.push();
+      }
     }
 
     await Promise.all(promises);
