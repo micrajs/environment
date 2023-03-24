@@ -1,6 +1,6 @@
 {
   "name": "@micra/environment",
-  "version": "0.1.0-next.4",
+  "version": "0.1.0-next.5",
   "description": "Micra's generic environment manager",
   "repository": {
     "type": "git",
